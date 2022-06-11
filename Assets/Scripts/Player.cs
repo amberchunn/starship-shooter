@@ -1,12 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private float _speed = 3.5f;
-    // Start is called before the first frame update
+    private float _speed = 8.5f;
+
+    [SerializeField] 
+    private GameObject _laserPrefab;
+    
     void Start()
     {
         transform.position = new Vector3(0, 0, 0);
@@ -15,23 +17,26 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CalculateMovement();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // Spawn laser capsule at default position
+            Instantiate(_laserPrefab, transform.position, Quaternion.identity);
+        }
+    }
+    
+    void CalculateMovement() {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         float currentPlayerX = transform.position.x;
         float currentPlayerY = transform.position.y;
         float xBoundLeft = -11.3f;
-        float xBoundRight = 8.7f;
+        float xBoundRight = 11.3f;
         float yBoundTop = 4.5f;
-        float yBoundBottom = -5.0f;
-        // transform.Translate(Vector3.right * horizontalInput * _speed * Time.deltaTime);
-        // transform.Translate(Vector3.up * verticalInput * _speed * Time.deltaTime);
-
-        // Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
-        // transform.Translate(direction * _speed * Time.deltaTime);
+        float yBoundBottom = -4.5f;
 
         transform.Translate(new Vector3(horizontalInput, verticalInput, 0) *_speed * Time.deltaTime);
-        // Wrap player position whenever they hit a boundary
-        // y bound = 4.5 top, -5.0 bottom
 
         if (currentPlayerY > yBoundTop) {
             transform.position = new Vector3(currentPlayerX, yBoundBottom, 0);
@@ -39,12 +44,10 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(currentPlayerX, yBoundTop, 0);
         }
 
-        // x bound = -11.3 left, 8.7 right
         if (currentPlayerX < xBoundLeft) {
             transform.position = new Vector3 (xBoundRight, currentPlayerY, 0);
         } else if (currentPlayerX > xBoundRight) {
             transform.position = new Vector3 (xBoundLeft, currentPlayerY, 0);
         }
-
     }
 }
