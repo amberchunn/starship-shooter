@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+// using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -6,9 +6,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _speed = 8.5f;
 
-    [SerializeField] 
+    [SerializeField]
     private GameObject _laserPrefab;
-    
+
     void Start()
     {
         transform.position = new Vector3(0, 0, 0);
@@ -18,14 +18,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         CalculateMovement();
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            // Spawn laser capsule at default position
+        if (Input.GetKeyDown(KeyCode.Space)) {
             Instantiate(_laserPrefab, transform.position, Quaternion.identity);
         }
     }
-    
+
     void CalculateMovement() {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
