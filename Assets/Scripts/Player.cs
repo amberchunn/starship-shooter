@@ -9,7 +9,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _fireRate = 0.5f;
     private float _canFire = -1f;
-
+    [SerializeField]
+    private GameObject _tripleShotPrefab;
+    [SerializeField]
+    private bool _isTripleShotActive = false;
     [SerializeField]
     private int _lives = 3;
     private SpawnManager _spawnManager;
@@ -60,8 +63,16 @@ public class Player : MonoBehaviour
 
     void FireLaser()
     {
-            _canFire = Time.time + _fireRate;
+        _canFire = Time.time + _fireRate;
+        if (_isTripleShotActive == true)
+        {
+            Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
+        }
+        else
+        {
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
+        }
+
     }
 
     public void Damage()
