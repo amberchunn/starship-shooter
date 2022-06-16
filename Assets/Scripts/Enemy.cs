@@ -7,14 +7,14 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
-        if (transform.position.y < -7f)
+        if (transform.position.y < -10f)
         {
             float randomX = Random.Range(-5f, 5f);
             transform.position = new Vector3(randomX, 7f, 0);
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
