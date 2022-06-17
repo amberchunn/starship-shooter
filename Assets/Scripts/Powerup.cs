@@ -2,14 +2,13 @@ using UnityEngine;
 
 public class Powerup : MonoBehaviour
 {
-    [SerializeField]
-    private float _speed = 3.0f;
-
+    private float _speed = 4.5f;
     void Update()
     {
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
-        if (transform.position.y < -4.0f) {
+        if (transform.position.y < -7.0f)
+        {
             Destroy(this.gameObject);
         }
     }
@@ -18,11 +17,11 @@ public class Powerup : MonoBehaviour
             if (other.tag == "Player")
             {
                 Player player = other.transform.GetComponent<Player>();
-                if (player != null)
-                {
-                    player.TripleShotActive();
-                }
-                Destroy(this.gameObject);
+                    if (player != null)
+                    {
+                        player.TripleShotActive();
+                        Destroy(this.gameObject);
+                    }
             }
         }
 }

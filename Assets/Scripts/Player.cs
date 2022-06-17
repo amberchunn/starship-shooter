@@ -17,7 +17,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private bool _isTripleShotActive = false;
     private SpawnManager _spawnManager;
-    // private PowerupManager _powerupManager;
 
     void Start()
     {
@@ -25,7 +24,6 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(0, 0, 0);
 
         _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
-        // _powerupManager = GameObject.Find("Powerup Manager").GetComponent<PowerupManager>();
 
         if(_spawnManager == null)
         {
@@ -85,12 +83,10 @@ public class Player : MonoBehaviour
     {
         _lives--;
         if (_lives < 1) {
-            // _powerupManager.SetPowerupSpawn();
             _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);
         }
     }
-
     public void TripleShotActive() {
         _isTripleShotActive = true;
         StartCoroutine(TripleShotPowerDownRoutine());
