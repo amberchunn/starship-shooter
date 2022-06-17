@@ -4,14 +4,13 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField]
+    private GameObject _enemyContainer;
+    [SerializeField]
     private GameObject _enemyPrefab;
     [SerializeField]
-    private float _enemyDropTime = 5;
-   [SerializeField]
-    private GameObject _enemyContainer;
-
+    private float _enemyDropTime = 5.0f;
     private bool _stopSpawning = false;
-    // Start is called before the first frame update
+
     void Start()
     {
         StartCoroutine(SpawnRoutine());

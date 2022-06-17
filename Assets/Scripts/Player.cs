@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -5,25 +6,30 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _speed = 8.5f;
     [SerializeField]
-    private GameObject _laserPrefab;
-    [SerializeField]
     private float _fireRate = 0.5f;
+    [SerializeField]
+    private int _lives = 3;
     private float _canFire = -1f;
+    [SerializeField]
+    private GameObject _laserPrefab;
     [SerializeField]
     private GameObject _tripleShotPrefab;
     [SerializeField]
     private bool _isTripleShotActive = false;
-    [SerializeField]
-    private int _lives = 3;
     private SpawnManager _spawnManager;
+    // private PowerupManager _powerupManager;
 
     void Start()
     {
+        // Start player at center
         transform.position = new Vector3(0, 0, 0);
+
         _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
+        // _powerupManager = GameObject.Find("Powerup Manager").GetComponent<PowerupManager>();
+
         if(_spawnManager == null)
         {
-            Debug.LogError("The SpawnManager is NULL");
+            Debug.LogError("Out of Order");
         }
     }
 
@@ -79,8 +85,19 @@ public class Player : MonoBehaviour
     {
         _lives--;
         if (_lives < 1) {
+            // _powerupManager.SetPowerupSpawn();
             _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);
         }
+    }
+
+    public void TripleShotActive() {
+        _isTripleShotActive = true;
+        StartCoroutine(TripleShotPowerDownRoutine());
+    }
+    IEnumerator TripleShotPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(5.0f);
+        _isTripleShotActive = false;
     }
 }

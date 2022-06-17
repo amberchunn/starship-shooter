@@ -14,25 +14,39 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    // When Enemy enters the scene and collides with 'other' object
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // If the 'other' object is the player
         if (other.tag == "Player")
         {
+            // Get the player component
             Player player = other.transform.GetComponent<Player>();
+
+            // If you have a player component
             if (player != null)
             {
+                // Call the Damage() method on the player object
                 player.Damage();
             }
+            // After handling the object collided with, Destroy Enemy (aka me - the object this script is attached to)
             Destroy(this.gameObject);
         }
+
+        // If the 'other' object is a laser
         if (other.tag == "Laser")
         {
+            // Grab the laser component
             Laser laser = other.transform.GetComponent<Laser>();
+
+            // If you have a laser component
             if (laser != null)
             {
-            Destroy(other.gameObject);
+                // Destroy me
+                Destroy(other.gameObject);
             }
         }
-            Destroy(this.gameObject);
+        // Make sure Enemy is destroyed if they've collided into anything
+        Destroy(this.gameObject);
     }
 }

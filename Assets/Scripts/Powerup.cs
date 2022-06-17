@@ -3,23 +3,26 @@ using UnityEngine;
 public class Powerup : MonoBehaviour
 {
     [SerializeField]
-    private float _speed = 3;
-
-    void Start()
-    {
-
-    }
+    private float _speed = 3.0f;
 
     void Update()
     {
-        // Move down at speed of 3
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
-        // When leave screen, destroy us
-        if (transform.position.y > 8f) {
+        if (transform.position.y < -4.0f) {
             Destroy(this.gameObject);
         }
-        // OnTriggerCollision
-        // Only player can collect
     }
+    private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.tag == "Player")
+            {
+                Player player = other.transform.GetComponent<Player>();
+                if (player != null)
+                {
+                    player.TripleShotActive();
+                }
+                Destroy(this.gameObject);
+            }
+        }
 }
