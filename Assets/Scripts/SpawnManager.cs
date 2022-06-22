@@ -5,43 +5,39 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _tripleShotPowerupPrefab;
-    [SerializeField]
     private GameObject _enemyContainer;
     [SerializeField]
     private GameObject _enemyPrefab;
     [SerializeField]
-    private float _spawnDropTime = 5.0f;
+    private float _enemyDropTime = 5.0f;
+    [SerializeField]
+    private GameObject[] _powerups;
     private bool _stopSpawning = false;
 
     void Start()
     {
-        StartCoroutine(EnemySpawnRoutine());
+        StartCoroutine(SpawnRoutine());
         StartCoroutine(PowerupSpawnRoutine());
     }
 
-    void Update()
-    {
-
-    }
-
-    IEnumerator EnemySpawnRoutine()
+    IEnumerator SpawnRoutine()
     {
         while(_stopSpawning == false)
         {
             GameObject newEnemy = Instantiate(_enemyPrefab, transform.position + new Vector3(Random.Range(-7f, 7f), 7, 0),Quaternion.identity);
-
             newEnemy.transform.parent = _enemyContainer.transform;
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(_enemyDropTime);
         }
     }
+
     IEnumerator PowerupSpawnRoutine()
     {
         while (_stopSpawning == false)
-            {
-                GameObject newPowerup = Instantiate(_tripleShotPowerupPrefab, transform.position + new Vector3(Random.Range(-8, 8), 7, 0), Quaternion.identity);
-                yield return new WaitForSeconds(Random.Range(3, 8));
-            }
+        {
+            int randomPowerup = Random.Range(0, 3);
+            Instantiate(_powerups[randomPowerup], new Vector3 (Random.Range(-7f, 7f), 7, 0), Quaternion.identity);
+            yield return new WaitForSeconds (Random.Range (3, 8));
+        }
     }
     public void OnPlayerDeath()
     {
