@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     private SpawnManager _spawnManager;
     private bool _isTripleShotActive = false;
     private bool _isSpeedBoostActive = false;
+    [SerializeField]
+    private GameObject _shieldVisual;
     private bool _isShieldsUpActive = false;
     void Start()
     {
@@ -82,7 +84,7 @@ public class Player : MonoBehaviour
     {
         if (_isShieldsUpActive == true) {
         {
-            // remove visual shield
+            _shieldVisual.SetActive(false);
             _isShieldsUpActive = false;
             return;
         }
@@ -118,5 +120,6 @@ public class Player : MonoBehaviour
     public void ShieldsUpActive()
     {
         _isShieldsUpActive = true;
+        _shieldVisual.SetActive(true);
     }
 }
