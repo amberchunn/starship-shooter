@@ -29,6 +29,13 @@ public class Enemy : MonoBehaviour
             if (player != null)
             {
                 // Call the Damage() method on the player object
+                if (player._isShieldsUpActive == true) {
+                    {
+                        // remove visual shield
+                        player._isShieldsUpActive = false;
+                        return;
+                    }
+                }
                 player.Damage();
             }
             // After handling the object collided with, Destroy Enemy (aka me - the object this script is attached to)

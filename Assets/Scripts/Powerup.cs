@@ -25,7 +25,6 @@ public class Powerup : MonoBehaviour
 
                 if (player != null)
                 {
-                    // player.TripleShotActive();
                     switch (_powerupID)
                     {
                         case 0:
@@ -33,11 +32,9 @@ public class Powerup : MonoBehaviour
                             break;
                         case 1:
                             player.SpeedBoostActive();
-                            Debug.Log("Speed Powered On");
                             break;
                         case 2:
-                            player.ShieldsUpActive();
-                            Debug.Log("Shields Powered On");
+                            player._isShieldsUpActive = true;
                             break;
                         default:
                             player.TripleShotActive();
