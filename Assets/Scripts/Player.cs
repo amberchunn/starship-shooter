@@ -17,16 +17,13 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _tripleShotPrefab;
     private SpawnManager _spawnManager;
-    public bool _isTripleShotActive = false;
-    public bool _isSpeedBoostActive = false;
-    public bool _isShieldsUpActive = false;
+    private bool _isTripleShotActive = false;
+    private bool _isSpeedBoostActive = false;
+    private bool _isShieldsUpActive = false;
     void Start()
     {
-        // Start player at center
         transform.position = new Vector3(0, 0, 0);
-
         _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
-
         if(_spawnManager == null)
         {
             Debug.LogError("Out of Order");
@@ -83,6 +80,13 @@ public class Player : MonoBehaviour
 
     public void Damage()
     {
+        if (_isShieldsUpActive == true) {
+        {
+            // remove visual shield
+            _isShieldsUpActive = false;
+            return;
+        }
+    }
         _lives--;
         if (_lives < 1) {
             _spawnManager.OnPlayerDeath();
@@ -110,5 +114,9 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(5.0f);
         _speed = _speed / _speedMultiplier;
         _isSpeedBoostActive = false;
+    }
+    public void ShieldsUpActive()
+    {
+        _isShieldsUpActive = true;
     }
 }
