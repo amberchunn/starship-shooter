@@ -6,6 +6,19 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 4f;
+    private Player _player;
+    private Animator _anim;
+    void Start()
+    {
+        _player = GameObject.Find("Player").GetComponent<Player>();
+
+        if (_player == null)
+        {
+            Debug.Log("Object Not Found");
+        }
+        _anim = GetComponent<Animator>();
+    }
+
     void Update()
     {
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
@@ -16,39 +29,33 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // When Enemy enters the scene and collides with 'other' object
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // If the 'other' object is the player
         if (other.tag == "Player")
         {
-            // Get the player component
             Player player = other.transform.GetComponent<Player>();
-
-            // If you have a player component
             if (player != null)
             {
-                // Call the Damage() method on the player object
                 player.Damage();
             }
-            // After handling the object collided with, Destroy Enemy (aka me - the object this script is attached to)
-            Destroy(this.gameObject);
+            _anim.SetTrigger("OnEnemyDeath");
+            _speed = 1f;
+            Destroy(this.gameObject, 2.5f);
         }
 
-        // If the 'other' object is a laser
         if (other.tag == "Laser")
         {
-            // Grab the laser component
-            Laser laser = other.transform.GetComponent<Laser>();
-
-            // If you have a laser component
-            if (laser != null)
+            Destroy(other.gameObject);
+            if (_player != null)
             {
-                // Destroy me
-                Destroy(other.gameObject);
+                int _enemyPoints = Random.Range(3, 20);
+                _player.IncreaseScore(_enemyPoints);
             }
+             _anim.SetTrigger("OnEnemyDeath");
+            _speed = 1f;
+            Destroy(this.gameObject, 2.5f);
         }
-        // Make sure Enemy is destroyed if they've collided into anything
-        Destroy(this.gameObject);
+
+
     }
 }

@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - Laser
   - Powerup
+  - UI
+  - Obstacle
+  - Engine
   layers:
   - Default
   - TransparentFX

@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     private float _fireRate = 0.5f;
     [SerializeField]
     private int _lives = 3;
+    [SerializeField]
+    private int _score = 0;
+    private UIManager _uiManager;
     private float _canFire = -1f;
     [SerializeField]
     private GameObject _laserPrefab;
@@ -18,7 +21,6 @@ public class Player : MonoBehaviour
     private GameObject _tripleShotPrefab;
     private SpawnManager _spawnManager;
     private bool _isTripleShotActive = false;
-    private bool _isSpeedBoostActive = false;
     [SerializeField]
     private GameObject _shieldVisual;
     private bool _isShieldsUpActive = false;
@@ -26,7 +28,9 @@ public class Player : MonoBehaviour
     {
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
-        if(_spawnManager == null)
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+
+        if(_spawnManager == null || _uiManager == null)
         {
             Debug.LogError("Out of Order");
         }
@@ -90,8 +94,13 @@ public class Player : MonoBehaviour
         }
     }
         _lives--;
+
+        _uiManager.UpdateLives(_lives);
+
         if (_lives < 1) {
+
             _spawnManager.OnPlayerDeath();
+
             Destroy(this.gameObject);
         }
     }
@@ -107,7 +116,6 @@ public class Player : MonoBehaviour
     }
     public void SpeedBoostActive()
     {
-        _isSpeedBoostActive = true;
         _speed = _speed * _speedMultiplier;
         StartCoroutine(SpeedBoostPowerDownRoutine());
     }
@@ -115,11 +123,15 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5.0f);
         _speed = _speed / _speedMultiplier;
-        _isSpeedBoostActive = false;
     }
     public void ShieldsUpActive()
     {
         _isShieldsUpActive = true;
         _shieldVisual.SetActive(true);
+    }
+    public void IncreaseScore(int points)
+    {
+        _score += points;
+        _uiManager.UpdateScore(_score);
     }
 }

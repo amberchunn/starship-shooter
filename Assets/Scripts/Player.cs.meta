@@ -4,9 +4,12 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
+  - _playerExplosion: {fileID: 3961263839226701938, guid: 917932d6043f54afe931452e415e2b92, type: 3}
   - _laserPrefab: {fileID: 8343701781203320695, guid: 07f99a2f317b64ba0ad12dcd1945df10, type: 3}
   - _tripleShotPrefab: {fileID: 5127052413947250703, guid: fc3b118ed44264ec79cc80f1c665f151, type: 3}
-  - _shieldVisual: {instanceID: 0}
+  - _shieldVisual: {fileID: 5206510611925181517, guid: a663ebb758bda4b199b8d1e69068ea27, type: 3}
+  - _LeftEngineFailure: {fileID: 4946788330537173109, guid: 46544610389ab42d78ce8a07fa9bdb58, type: 3}
+  - _RightEngineFailure: {fileID: 4946788330537173109, guid: 46544610389ab42d78ce8a07fa9bdb58, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
