@@ -14,9 +14,13 @@ public class Enemy : MonoBehaviour
 
         if (_player == null)
         {
-            Debug.Log("Object Not Found");
+            Debug.LogError("Player Object Not Found");
         }
         _anim = GetComponent<Animator>();
+        if (_anim == null)
+        {
+            Debug.LogError("Animation Object Not Found");
+        }
     }
 
     void Update()
@@ -31,16 +35,17 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        _player = other.transform.GetComponent<Player>();
+
         if (other.tag == "Player")
         {
-            Player player = other.transform.GetComponent<Player>();
-            if (player != null)
+            if (_player != null)
             {
-                player.Damage();
+                _player.Damage();
             }
             _anim.SetTrigger("OnEnemyDeath");
-            _speed = 1f;
-            Destroy(this.gameObject, 2.5f);
+            _speed = .25f;
+            Destroy(this.gameObject, 2.25f);
         }
 
         if (other.tag == "Laser")
@@ -51,9 +56,9 @@ public class Enemy : MonoBehaviour
                 int _enemyPoints = Random.Range(3, 20);
                 _player.IncreaseScore(_enemyPoints);
             }
-             _anim.SetTrigger("OnEnemyDeath");
-            _speed = 1f;
-            Destroy(this.gameObject, 2.5f);
+            _anim.SetTrigger("OnEnemyDeath");
+            _speed = .25f;
+            Destroy(this.gameObject, 2.25f);
         }
 
 

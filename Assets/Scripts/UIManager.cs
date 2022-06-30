@@ -18,12 +18,17 @@ public class UIManager : MonoBehaviour
     private Text _gameOverText;
     [SerializeField]
     private GameManager _gameManager;
+    [SerializeField]
+    private SpawnManager _spawnManager;
+
     void Start()
     {
         _scoreText.text = "Score: " + 0;
         _gameOverText.gameObject.SetActive(false);
 
         _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
+        _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
 
         if (_gameManager == null)
         {
@@ -38,7 +43,7 @@ public class UIManager : MonoBehaviour
     {
         _livesImage.sprite = _liveSprites[currentLives];
 
-        if (currentLives == 0)
+        if (currentLives < 1)
         {
             GameOverSequence();
         }

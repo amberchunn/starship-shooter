@@ -26,13 +26,13 @@ public class Player : MonoBehaviour
     private bool _isShieldsUpActive = false;
     void Start()
     {
-        transform.position = new Vector3(0, 0, 0);
+        // transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
 
         if(_spawnManager == null || _uiManager == null)
         {
-            Debug.LogError("Out of Order");
+            Debug.LogError("Object Not Found");
         }
     }
 
@@ -97,11 +97,9 @@ public class Player : MonoBehaviour
 
         _uiManager.UpdateLives(_lives);
 
-        if (_lives < 1) {
-
-            _spawnManager.OnPlayerDeath();
-
+        if (_lives == 0) {
             Destroy(this.gameObject);
+            _spawnManager.OnPlayerDeath();
         }
     }
 
