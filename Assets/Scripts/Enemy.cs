@@ -35,8 +35,6 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        _player = other.transform.GetComponent<Player>();
-
         if (other.tag == "Player")
         {
             if (_player != null)
