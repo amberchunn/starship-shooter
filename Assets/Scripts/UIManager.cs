@@ -59,7 +59,7 @@ public class UIManager : MonoBehaviour
 
     IEnumerator GameOverFlickerRoutine()
     {
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(2.5f);
 
         while(true)
         {

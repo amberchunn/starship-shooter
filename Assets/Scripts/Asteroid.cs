@@ -9,11 +9,13 @@ public class Asteroid : MonoBehaviour
     [SerializeField]
     private float _rotationSpeed;
     private SpawnManager _spawnManager;
+    private UIManager _uiManager;
 
 
     void Start ()
     {
         _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
     }
     void Update()
     {
@@ -21,14 +23,21 @@ public class Asteroid : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // TODO: If player hits asteroid, player should die
+        Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+
+        Destroy(other.gameObject, -2f);
 
         if (other.tag == "Laser")
         {
-            Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
-            Destroy(other.gameObject);
             _spawnManager.StartSpawning();
-            Destroy(this.gameObject, -1.5f);
         }
+        if (other.tag == "Player")
+        {
+            _uiManager.UpdateLives(0);
+            _spawnManager.OnPlayerDeath();
+        }
+
+        Destroy(this.gameObject, -2.5f);
+
     }
 }
