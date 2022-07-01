@@ -24,9 +24,14 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _shieldVisual;
     private bool _isShieldsUpActive = false;
+    [SerializeField]
+    private GameObject[] _engineFailure;
+    private int effectedEngine;
+    [SerializeField]
+    private GameObject _explosionPrefab;
+
     void Start()
     {
-        // transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
 
@@ -95,12 +100,34 @@ public class Player : MonoBehaviour
     }
         _lives--;
 
+        // Damage Levels
+
+        switch (_lives)
+        {
+            case 3:
+                break;
+            case 2:
+                effectedEngine = Random.Range(0,2);
+                _engineFailure[effectedEngine].SetActive(true);
+                break;
+            case 1:
+                if (effectedEngine == 0)
+                {
+                    _engineFailure[1].SetActive(true);
+                } else
+                {
+                    _engineFailure[0].SetActive(true);
+                }
+                break;
+            case 0:
+                Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+                Destroy(this.gameObject);
+                _spawnManager.OnPlayerDeath();
+                break;
+        }
+
         _uiManager.UpdateLives(_lives);
 
-        if (_lives == 0) {
-            Destroy(this.gameObject);
-            _spawnManager.OnPlayerDeath();
-        }
     }
 
     public void TripleShotActive() {

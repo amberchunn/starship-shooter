@@ -21,6 +21,8 @@ public class Asteroid : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // TODO: If player hits asteroid, player should die
+
         if (other.tag == "Laser")
         {
             Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
