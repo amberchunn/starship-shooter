@@ -8,6 +8,8 @@ MonoImporter:
   - _tripleShotPrefab: {fileID: 5127052413947250703, guid: fc3b118ed44264ec79cc80f1c665f151, type: 3}
   - _shieldVisual: {fileID: 5206510611925181517, guid: a663ebb758bda4b199b8d1e69068ea27, type: 3}
   - _explosionPrefab: {fileID: 5779361438479006422, guid: 917932d6043f54afe931452e415e2b92, type: 3}
+  - _audioSource: {instanceID: 0}
+  - _laserSound: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

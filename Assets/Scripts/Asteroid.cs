@@ -11,11 +11,14 @@ public class Asteroid : MonoBehaviour
     private SpawnManager _spawnManager;
     private UIManager _uiManager;
 
-
+    private AudioSource _audioSource;
+    [SerializeField]
+    private AudioClip _boomSound;
     void Start ()
     {
         _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _audioSource = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -24,6 +27,7 @@ public class Asteroid : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+        AudioSource.PlayClipAtPoint(_boomSound, transform.position);
 
         Destroy(other.gameObject, -2f);
 

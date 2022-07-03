@@ -3,7 +3,8 @@ guid: 12684d6f87c3a4583b69114bb7cd66a4
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _boomSound: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

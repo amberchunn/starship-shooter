@@ -8,7 +8,16 @@ public class Powerup : MonoBehaviour
     private float _speed = 3.0f;
     [SerializeField]
     public int _powerupID = 0;
+    private Player _player;
 
+    [SerializeField]
+    private AudioClip _powerupSound;
+
+    void Start ()
+    {
+        _player = GameObject.Find("Player").GetComponent<Player>();
+
+    }
     void Update()
     {
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
@@ -22,6 +31,7 @@ public class Powerup : MonoBehaviour
             if (other.tag == "Player")
             {
                 Player player = other.transform.GetComponent<Player>();
+                AudioSource.PlayClipAtPoint(_powerupSound, transform.position);
 
                 if (player != null)
                 {

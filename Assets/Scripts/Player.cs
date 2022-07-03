@@ -29,13 +29,16 @@ public class Player : MonoBehaviour
     private int effectedEngine;
     [SerializeField]
     private GameObject _explosionPrefab;
-
+    private AudioSource _audioSource;
+    [SerializeField]
+    private AudioClip _laserSound;
     void Start()
     {
         _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _audioSource = GetComponent<AudioSource>();
 
-        if(_spawnManager == null || _uiManager == null)
+        if(_spawnManager == null || _uiManager == null || _audioSource)
         {
             Debug.LogError("Object Not Found");
         }
@@ -87,6 +90,7 @@ public class Player : MonoBehaviour
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
         }
 
+        AudioSource.PlayClipAtPoint(_laserSound, transform.position);
     }
 
     public void Damage()
