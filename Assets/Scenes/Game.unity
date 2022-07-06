@@ -958,7 +958,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyContainer: {fileID: 1171375329}
+  _enemyFireContainer: {fileID: 6775102505203493546, guid: 01ea5c859b3b946f1af304de9b3d19c9, type: 3}
+  _spawnManager: {fileID: 713388942}
   _enemyPrefab: {fileID: 6220202938694229946, guid: 221990318a9e443618902a667bcb1e04, type: 3}
+  _enemyLaserPrefab: {fileID: 8343701781203320695, guid: 07f99a2f317b64ba0ad12dcd1945df10, type: 3}
   _enemyDropTime: 5
   _spawnDelay: 2.5
   _powerups:
@@ -1007,7 +1010,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1.32

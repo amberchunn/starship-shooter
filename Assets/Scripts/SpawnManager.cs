@@ -7,10 +7,12 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject _enemyContainer;
     [SerializeField]
+    private GameObject _enemyFireContainer;
+    [SerializeField]
+    private GameObject _spawnManager;
+    [SerializeField]
     private GameObject _enemyPrefab;
-    [SerializeField]
     private float _enemyDropTime = 5.0f;
-    [SerializeField]
     private float _spawnDelay = 2.5f;
     [SerializeField]
     private GameObject[] _powerups;
@@ -28,7 +30,9 @@ public class SpawnManager : MonoBehaviour
         while(_stopSpawning == false)
         {
             GameObject newEnemy = Instantiate(_enemyPrefab, transform.position + new Vector3(Random.Range(-7f, 7f), 7, 0),Quaternion.identity);
+
             newEnemy.transform.parent = _enemyContainer.transform;
+
             yield return new WaitForSeconds(_enemyDropTime);
         }
     }

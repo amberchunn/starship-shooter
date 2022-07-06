@@ -6,10 +6,14 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 4f;
+    private float _canFire;
+    private float _fireRate = 3.0f;
+    [SerializeField]
+    private GameObject _enemyLaserPrefab;
     private Player _player;
     private Animator _anim;
     public GameObject _explosionPrefab;
-    [SerializeField]
+    // [SerializeField]
     private AudioClip _boomSound;
 
     void Start()
@@ -29,14 +33,26 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.down * _speed * Time.deltaTime);
-        if (transform.position.y < -10f)
+        CalculateMovement();
+
+        if (Time.time > _canFire)
         {
-            float randomX = Random.Range(-5f, 5f);
-            transform.position = new Vector3(randomX, 7f, 0);
+            _fireRate = Random.Range(3f, 7f);
+            _canFire = Time.time + _fireRate;
+            Instantiate(_enemyLaserPrefab, transform.position, Quaternion.identity);
+            Debug.Break();
         }
     }
+    void CalculateMovement()
+    {
+        transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
+        if(transform.position.y < -5f)
+        {
+            float randomX = Random.Range(-8, 8);
+            transform.position = new Vector3(randomX, 7, 0);
+        }
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         AudioSource.PlayClipAtPoint(_boomSound, transform.position);

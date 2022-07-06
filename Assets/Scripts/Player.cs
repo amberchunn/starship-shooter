@@ -32,11 +32,11 @@ public class Player : MonoBehaviour
     private AudioSource _audioSource;
     [SerializeField]
     private AudioClip _laserSound;
+
     void Start()
     {
         _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
-        _audioSource = GetComponent<AudioSource>();
 
         if(_spawnManager == null || _uiManager == null || _audioSource)
         {

@@ -5,7 +5,10 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - _enemyContainer: {fileID: 6775102505203493546, guid: 01ea5c859b3b946f1af304de9b3d19c9, type: 3}
+  - _enemyFireContainer: {fileID: 6775102505203493546, guid: 01ea5c859b3b946f1af304de9b3d19c9, type: 3}
+  - _spawnManager: {fileID: 6775102505203493546, guid: 01ea5c859b3b946f1af304de9b3d19c9, type: 3}
   - _enemyPrefab: {fileID: 6220202938694229946, guid: 221990318a9e443618902a667bcb1e04, type: 3}
+  - _enemyLaserPrefab: {fileID: 6220784658686092492, guid: 04841366d28e8475e93ab34dfb0e0ee6, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
