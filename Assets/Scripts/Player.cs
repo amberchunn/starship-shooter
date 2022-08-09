@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     private bool _isShieldsUpActive = false;
     [SerializeField]
     private GameObject[] _engineFailure;
-    private int effectedEngine;
+    private int _effectedEngine;
     [SerializeField]
     private GameObject _explosionPrefab;
     private AudioSource _audioSource;
@@ -111,11 +111,11 @@ public class Player : MonoBehaviour
             case 3:
                 break;
             case 2:
-                effectedEngine = Random.Range(0,2);
-                _engineFailure[effectedEngine].SetActive(true);
+                _effectedEngine = Random.Range(0,2);
+                _engineFailure[_effectedEngine].SetActive(true);
                 break;
             case 1:
-                if (effectedEngine == 0)
+                if (_effectedEngine == 0)
                 {
                     _engineFailure[1].SetActive(true);
                 } else

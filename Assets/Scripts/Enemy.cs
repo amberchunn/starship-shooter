@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -12,8 +10,8 @@ public class Enemy : MonoBehaviour
     private GameObject _enemyLaserPrefab;
     private Player _player;
     private Animator _anim;
-    public GameObject _explosionPrefab;
-    // [SerializeField]
+    [SerializeField]
+    private GameObject _explosionPrefab;
     private AudioClip _boomSound;
 
     void Start()
