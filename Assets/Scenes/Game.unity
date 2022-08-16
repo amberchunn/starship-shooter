@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 32127045}
   - component: {fileID: 32127044}
   - component: {fileID: 32127046}
+  - component: {fileID: 32127047}
   m_Layer: 5
   m_Name: Score_txt
   m_TagString: UI
@@ -226,6 +227,46 @@ MonoBehaviour:
   _gameOverText: {fileID: 388987571}
   _gameManager: {fileID: 510269626}
   _spawnManager: {fileID: 0}
+--- !u!114 &32127047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32127042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:a2e4055fa6b7640349324d60322c57de
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 830787427564120089, guid: bd9c114044d534aa7a12722b86af154e, type: 3}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &45854786
 GameObject:
   m_ObjectHideFlags: 0
@@ -961,9 +1002,6 @@ MonoBehaviour:
   _enemyFireContainer: {fileID: 6775102505203493546, guid: 01ea5c859b3b946f1af304de9b3d19c9, type: 3}
   _spawnManager: {fileID: 713388942}
   _enemyPrefab: {fileID: 6220202938694229946, guid: 221990318a9e443618902a667bcb1e04, type: 3}
-  _enemyLaserPrefab: {fileID: 8343701781203320695, guid: 07f99a2f317b64ba0ad12dcd1945df10, type: 3}
-  _enemyDropTime: 5
-  _spawnDelay: 2.5
   _powerups:
   - {fileID: 7190870872296813965, guid: 0ed3ae9ed1fe247f3a835426b7261851, type: 3}
   - {fileID: 48839910515032166, guid: b15225d184df74470baba08e5c44a4d6, type: 3}
